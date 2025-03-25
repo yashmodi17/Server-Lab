@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Assignment</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+        h2 { color: blue; }
+        button { margin: 5px; padding: 8px; background: blue; color: white; border: none; cursor: pointer; }
+        button:hover { background: darkblue; }
+        input { padding: 5px; margin: 5px; }
+        .task { background: white; padding: 10px; margin: 5px; border: 1px solid gray; }
+    </style>
+</head>
+<body>
+
+    <h2>JavaScript Tasks</h2>
+
+    <h3>1. Variables, Functions, Conditions & Loops</h3>
+    <button onclick="bmiCalc()">BMI Calculator</button>
+    <button onclick="tempConvert()">Convert Temperature</button>
+
+    <h3>2. Pop-up Boxes</h3>
+    <button onclick="showAlert()">Alert</button>
+    <button onclick="confirmDelete()">Confirm Delete</button>
+    <button onclick="askName()">Prompt</button>
+
+    <h3>3. Event Handling & DOM Manipulation</h3>
+    <button onclick="changeMsg()">Change Text</button>
+    <button onmouseover="hoverEffect(this)" onmouseout="resetHover(this)">Hover</button>
+    <p id="msg">Original Text</p>
+
+    <h4>Dynamic List</h4>
+    <input type="text" id="itemInput" placeholder="Type item">
+    <button onclick="addItem()">Add</button>
+    <ul id="list"></ul>
+
+    <h3>4. Form Validation</h3>
+    <form onsubmit="return checkForm()">
+        <input type="text" id="userName" placeholder="Name">
+        <input type="email" id="userEmail" placeholder="Email">
+        <input type="password" id="userPass" placeholder="Password">
+        <button type="submit">Submit</button>
+        <p id="errorMsg" style="color: red;"></p>
+    </form>
+    
+    <h3>5. JavaScript Objects & AJAX</h3>
+    <p id="dateTime"></p>
+    <button onclick="randomNumber()">Random Number</button>
+    <p id="rand"></p>
+
+    <h4>Weather</h4>
+    <button onclick="getWeather()">Get Weather</button>
+    <p id="weatherInfo"></p>
+
+    <h3>6. To-Do List</h3>
+    <input type="text" id="taskInput" placeholder="New Task">
+    <button onclick="addTask()">Add</button>
+    <div id="taskList"></div>
+
+    <h3>7. Chatbot</h3>
+    <input type="text" id="chatBox" placeholder="Ask something">
+    <button onclick="chatBot()">Send</button>
+    <p id="chatReply"></p>
+
+    <script>
+
+        function bmiCalc() {
+            let w = prompt("Enter weight (kg):");
+            let h = prompt("Enter height (m):");
+            let bmi = w / (h * h);
+            alert("Your BMI: " + bmi.toFixed(2));
+        }
+
+        function tempConvert() {
+            let c = prompt("Enter Celsius temperature:");
+            let f = (c * 9/5) + 32;
+            alert(c + "°C = " + f + "°F");
+        }
+
+        function showAlert() { alert("This is an alert!"); }
+        function confirmDelete() { confirm("Are you sure to delete?"); }
+        function askName() {
+            let name = prompt("Enter your name:");
+            if (name) alert("Hello, " + name);
+        }
+
+        function changeMsg() { document.getElementById("msg").innerText = "Text Updated!"; }
+        function hoverEffect(el) { el.innerText = "Hovered!"; }
+        function resetHover(el) { el.innerText = "Hover"; }
+
+        function addItem() {
+            let item = document.getElementById("itemInput").value;
+            if (item) {
+                let li = document.createElement("li");
+                li.innerText = item;
+                document.getElementById("list").appendChild(li);
+            }
+        }
+
+        function checkForm() {
+            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            let passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            let email = document.getElementById("userEmail").value;
+            let password = document.getElementById("userPass").value;
+
+            if (!email.match(emailPattern)) {
+                document.getElementById("errorMsg").innerText = "Invalid Email!";
+                return false;
+            }
+            if (!password.match(passPattern)) {
+                document.getElementById("errorMsg").innerText = "Weak Password!";
+                return false;
+            }
+            alert("Form Submitted!");
+            return true;
+        }
+
+        document.getElementById("dateTime").innerText = new Date().toLocaleString();
+        function randomNumber() { document.getElementById("rand").innerText = Math.floor(Math.random() * 100); }
+
+        function getWeather() {
+            fetch("https://api.open-meteo.com/v1/forecast?latitude=35&longitude=139&current_weather=true")
+                .then(response => response.json())
+                .then(data => document.getElementById("weatherInfo").innerText = "Temp: " + data.current_weather.temperature + "°C");
+        }
+
+        function addTask() {
+            let taskText = document.getElementById("taskInput").value;
+            let task = document.createElement("div");
+            task.className = "task";
+            task.innerText = taskText;
+            task.onclick = () => task.remove();
+            document.getElementById("taskList").appendChild(task);
+        }
+
+        function chatBot() {
+            let input = document.getElementById("chatBox").value.toLowerCase();
+            let response = (input.includes("hello")) ? "Hi!" : "I don't know.";
+            document.getElementById("chatReply").innerText = response;
+        }
+
+    </script>
+
+</body>
+</html>

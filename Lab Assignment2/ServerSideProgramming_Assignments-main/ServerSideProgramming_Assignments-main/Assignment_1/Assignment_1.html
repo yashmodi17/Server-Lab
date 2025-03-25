@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IET DAVV - Student Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #8C1515;
+            color: white;
+            padding: 40px 0 20px 100px;
+        }
+
+        nav {
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: black;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #8C1515;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .highlight {
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 5px solid #00509e;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 80vw;
+            max-width: 600px;
+            margin: 50px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 400%;
+        }
+
+        .slides img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            /* Two columns with different sizes */
+            grid-template-rows: repeat(2, 1fr);
+            /* Two rows */
+            gap: 10px;
+            /* Space between grid items */
+            width: 80%;
+            /* Adjust container width */
+            margin: 10px auto;
+            max-height: fit-content;
+
+            /* Center the grid */
+        }
+
+        .grid-item {
+            background-color: #F2F1EB;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .small-item {
+            grid-column: 1 / 2;
+            /* Occupy the first column */
+        }
+
+        .small-item:nth-child(1) {
+            grid-row: 1 / 2;
+            /* Top left */
+        }
+
+        .small-item:nth-child(2) {
+            grid-row: 2 / 3;
+            /* Bottom left */
+        }
+
+        .large-item {
+            grid-column: 2 / 3;
+            /* Occupy the second column */
+            grid-row: 1 / 3;
+            /* Span across both rows */
+        }
+        .upperbox{
+            background-color:#8C1515;
+            color: white;
+            font-weight: bold;
+        }
+        .underbox{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            width: 100%;
+            height: 100%;
+        }
+        .red{
+            color: red;
+            font-size: bold;
+        }
+        .black{
+            color: black;
+            font-size: bold;
+        }
+        .frame{
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .last{
+            background-color: #F2F1EB;
+            width: 90%;
+        }
+        .links{
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center ;
+        }
+        .links a{
+            padding: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://www.ietdavv.edu.in/images/banners/ietlogom.png" alt="image" width="700px">
+        <span><input type="text" placeholder="Search"></span>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Academics</a>
+        <a href="#">Admissions</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+        <div class="slider-container">
+            <div class="slides">
+                <img src="https://www.ietdavv.edu.in/images/IIIC/P4.jpg" alt="Slide 1">
+                <img src="https://www.ietdavv.edu.in/images/IIIC/P4.jpg" alt="Slide 2">
+                <img src="https://www.ietdavv.edu.in/images/IIIC/P8.jpg" alt="Slide 3">
+                <img src="https://www.ietdavv.edu.in/images/IIIC/P11.jpg" alt="Slide 4">
+            </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
+        <h2>Welcome to IET DAVV</h2>
+        <p>The Institute of Engineering & Technology (IET) is a premier engineering institute established in 1996 under
+            Devi Ahilya Vishwavidyalaya, Indore. We offer undergraduate and postgraduate programs in various engineering
+            disciplines.</p>
+
+        <div class="highlight">
+            <h3>Latest News</h3>
+            <ul>
+                <li>Admissions open for the academic year 2025-2026.</li>
+                <li>Upcoming webinar on Emerging Technologies on April 15, 2025.</li>
+                <li>Congratulations to our students for securing top positions in the university exams.</li>
+            </ul>
+        </div>
+
+        <div class="grid-layout">
+            <div class="grid-item small-item">
+                <div class="upperbox">HIGHLIGHTS</div>
+                <div class="underbox">
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/eda050c11ceb48aaa55577826cc0054e-VM_IET.jpg" alt="">
+                        <p>Vision-Mission IET</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/91823c13c153e464aff9f5532ac51bc7-VM_DAVV.jpg" alt="">
+                        <p>Vision-Mission DAVV</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/d090f215b054a039b39988245bd26c99-Program_Outcomes.jpg" alt="">
+                        <p>Program Outcomes</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/9aef8aaa920981e4c2b94e6746ffa1a3-Devi_Ahilya_bai.jpg" alt="">
+                        <p>IET Strategic Plan</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/d090f215b054a039b39988245bd26c99-Program_Outcomes.jpg" alt="">
+                        <p>Program Outcomes</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/9aef8aaa920981e4c2b94e6746ffa1a3-Devi_Ahilya_bai.jpg" alt="">
+                        <p>IET Strategic Plan</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/d090f215b054a039b39988245bd26c99-Program_Outcomes.jpg" alt="">
+                        <p>Program Outcomes</p>
+                    </div>
+                    <div class="frame">
+                        <img src="https://www.ietdavv.edu.in/cache/mod_bt_contentslider/9aef8aaa920981e4c2b94e6746ffa1a3-Devi_Ahilya_bai.jpg" alt="">
+                        <p>IET Strategic Plan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item small-item">
+                <div class="upperbox">HIGHLIGHTS</div>
+                <img src="https://www.ietdavv.edu.in/images/freshers2.jpg" alt="">
+                <div class="contents">
+                    <p class="red">BTech I Year Test timetable</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Test timetable</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Scheme & Syllabus</p>
+                    <p class="black">(for Session 2024-25)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Notice Regarding Whatsapp group</p>
+                    <p class="black">(for BE I Year students)</p>
+                </div>              
+            </div>
+            <div class="grid-item large-item">
+                <div class="upperbox">LATEST@IET</div>
+                <div class="contents">
+                    <p class="red">Centralized placement cell guidelines (by DAVV)</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Test timetable</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Scheme & Syllabus</p>
+                    <p class="black">(for Session 2024-25)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Notice Regarding Whatsapp group</p>
+                    <p class="black">(for BE I Year students)</p>
+                </div>
+                <div class="contents">
+                    <p class="red">Centralized placement cell guidelines (by DAVV)</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Test timetable</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Scheme & Syllabus</p>
+                    <p class="black">(for Session 2024-25)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Notice Regarding Whatsapp group</p>
+                    <p class="black">(for BE I Year students)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Scheme & Syllabus</p>
+                    <p class="black">(for Session 2024-25)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Notice Regarding Whatsapp group</p>
+                    <p class="black">(for BE I Year students)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Centralized placement cell guidelines (by DAVV)</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Test timetable</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Scheme & Syllabus</p>
+                    <p class="black">(for Session 2024-25)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Notice Regarding Whatsapp group</p>
+                    <p class="black">(for BE I Year students)</p>
+                </div>
+                <div class="contents">
+                    <p class="red">BE I Year Test timetable</p>
+                    <p class="black">March-2025</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">BE I Year Scheme & Syllabus</p>
+                    <p class="black">(for Session 2024-25)</p>
+                </div>
+                *****************************************
+                <div class="contents">
+                    <p class="red">Notice Regarding Whatsapp group</p>
+                    <p class="black">(for BE I Year students)</p>
+                </div>
+                *****************************************
+            </div>
+        </div>
+
+        <div class="last">
+            <div class="upperbox">Quick Links</div>
+            <div class="links">
+                <a href="">IET-DAVV ACM Students</a>
+                <a href="">Student Feedback</a>
+                <a href="">IET-DAVV ACM Students</a>
+                <a href="">Adminstration</a>
+                <a href="">Contact Directory</a>
+                <a href="">Chapter</a>
+                <a href="">Spoken Tutorial</a>
+                <a href="">IET-DAVV ACM Students</a>
+                <a href="">Adminstration</a>
+                <a href="">Contact Directory</a>
+                <a href="">Chapter</a>
+                <a href="">Spoken Tutorial</a>
+                <a href="">University Website</a>
+                <a href="">E-Books</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy;2024 IET DAVV. All Rights Reserved. Website managed by IET-DAVV web development team. for any queries
+            contact at: webmaster@ietdavv.edu.in</p>
+    </footer>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelector(".slides");
+
+        function showSlide() {
+            let width = document.querySelector(".slider-container").offsetWidth;
+            slides.style.transform = `translateX(${-index * width}px)`;
+        }
+
+        function nextSlide() {
+            index = (index + 1) % 4;
+            showSlide();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + 4) % 4;
+            showSlide();
+        }
+
+        setInterval(nextSlide, 3000);
+
+    </script>
+</body>
+
+</html>

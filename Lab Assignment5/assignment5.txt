@@ -1,0 +1,237 @@
+﻿ASSIGNMENT -5
+
+ISHU ANAND MALVIYA CSA 3rd year
+
+1. Understanding CGI vs Servlets (Theory) 
+
+Common Gateway Interface (CGI) and Java Servlets are both used for handling web requests, but 
+Servlets are more efficient. 
+
+CGI: 
+
+• CGI scripts are executed separately for each request. 
+• It creates a new process for each request, leading to high memory and CPU usage. 
+• CGI scripts can be written in multiple languages like Python, Perl, or Shell. 
+
+Servlets: 
+
+• Servlets run inside the Java Virtual Machine (JVM), making them faster. 
+• They use a single process and handle multiple requests through threads. 
+• Servlets are more secure and scalable than CGI. 
+
+Advantages of Servlets over CGI: 
+
+Feature CGI Servlets
+
+Performance Slower, as it creates a new process per 
+request Faster, as it uses threads
+
+Scalability Poor, high resource usage Better, optimized resource 
+use
+
+Security Lower, as scripts execute separately Higher, runs inside JVM
+Language 
+Support Python, Perl, Shell Java
+
+2. Practical Implementation 
+
+CGI Implementation (Python) 
+
+<form action="/cgi-bin/form.py" method="post"> 
+    Name: <input type="text" name="name"><br> 
+    Age: <input type="text" name="age"><br> 
+    <input type="submit" value="Submit"> 
+</form> 
+
+
+
+import cgi 
+
+print("Content-type: text/html\n") 
+form = cgi.FieldStorage() 
+
+name = form.getvalue("name") 
+age = form.getvalue("age") 
+
+print(f"<h1> Hello, {name}! You are {age} years old.</h1>”) 
+
+html 
+
+<form action="FormServlet" method="post"> 
+    Name: <input type="text" name="name"><br> 
+    Age: <input type="text" name="age"><br> 
+    <input type="submit" value="Submit"> 
+</form> 
+
+1. FormServlet.java 
+java 
+
+import java.io.IOException; 
+import java.io.PrintWriter; 
+import javax.servlet.ServletException; 
+import javax.servlet.annotation.WebServlet; 
+import javax.servlet.http.HttpServlet; 
+import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletResponse; 
+
+@WebServlet("/FormServlet") 
+public class FormServlet extends HttpServlet { 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException { 
+        response.setContentType("text/html"); 
+        PrintWriter out = response.getWriter(); 
+
+        String name = request.getParameter("name"); 
+        String age = request.getParameter("age"); 
+
+        out.println("<h1>Hello, " + name + "! You are " + age + " years old.</h1>"); 
+    } 
+} 
+
+
+
+2. Deploy the Servlet in Tomcat 
+
+javac -cp /path-to-tomcat/lib/servlet-api.jar FormServlet.java 
+• Copy the .class file to WEB-INF/classes 
+• Define servlet mapping in web.xml (if needed) 
+• Restart Tomcat and test at http://localhost:8080/yourApp/FormServlet 
+
+Servlet API & Basic Servlet Implementation 
+
+@WebServlet("/WelcomeServlet") 
+public class WelcomeServlet extends HttpServlet { 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException { 
+        response.setContentType("text/html"); 
+        PrintWriter out = response.getWriter(); 
+        out.println("<h1>Welcome to Java Servlets!</h1>"); 
+    } 
+} 
+
+@WebServlet("/UserDetails") 
+public class UserDetails extends HttpServlet { 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException { 
+        response.setContentType("text/html"); 
+        PrintWriter out = response.getWriter(); 
+
+        String user = request.getParameter("user"); 
+        String ip = request.getRemoteAddr(); 
+        String userAgent = request.getHeader("User-Agent"); 
+
+        out.println("<h1>User: " + user + "</h1>"); 
+        out.println("<p>IP Address: " + ip + "</p>"); 
+        out.println("<p>User-Agent: " + userAgent + "</p>"); 
+    } 
+} 
+
+ServletConfig & ServletContext 
+
+
+
+@WebServlet("/DBServlet") 
+public class DBServlet extends HttpServlet { 
+    private String dbUrl; 
+
+    public void init(ServletConfig config) throws ServletException { 
+        dbUrl = config.getInitParameter("databaseURL"); 
+    } 
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException { 
+        response.getWriter().println("Database URL: " + dbUrl); 
+    } 
+} 
+ServletContext Example 
+@WebServlet("/ContextExample") 
+public class ContextExample extends HttpServlet { 
+    public void doGet(HttpServletRequest request, HttpServletResponse response)  
+            throws ServletException, IOException { 
+        ServletContext context = getServletContext(); 
+        context.setAttribute("appName", "ServletApp"); 
+        response.getWriter().println("Application Name Set"); 
+    } 
+} 
+
+4 Session Management in Servlets 
+
+@WebServlet("/CookieServlet") 
+public class CookieServlet extends HttpServlet { 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException { 
+        Cookie cookie = new Cookie("username", "JohnDoe"); 
+        response.addCookie(cookie); 
+        response.getWriter().println("Cookie Set: " + cookie.getValue()); 
+    } 
+} 
+@WebServlet("/URLRewrite") 
+public class URLRewrite extends HttpServlet { 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+
+
+
+            throws ServletException, IOException { 
+        HttpSession session = request.getSession(); 
+        session.setAttribute("user", "JohnDoe"); 
+        response.sendRedirect("Profile?user=JohnDoe"); 
+    } 
+} 
+@WebServlet("/SessionExample") 
+public class SessionExample extends HttpServlet { 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException { 
+        HttpSession session = request.getSession(); 
+        session.setAttribute("theme", "dark"); 
+        response.getWriter().println("Session Set: " + session.getAttribute("theme")); 
+    } 
+} 
+
+5. RequestDispatcher & Servlet Communication 
+
+@WebServlet("/LoginServlet") 
+public class LoginServlet extends HttpServlet { 
+    protected void doPost(HttpServletRequest request, HttpServletResponse 
+response) 
+            throws ServletException, IOException { 
+        String username = request.getParameter("username"); 
+        String password = request.getParameter("password"); 
+
+        if ("admin".equals(username) && "1234".equals(password)) { 
+            request.setAttribute("user", username); 
+            RequestDispatcher rd = request.getRequestDispatcher("WelcomeServlet"); 
+            rd.forward(request, response); 
+        } else { 
+            response.sendRedirect("login.html?error=Invalid credentials"); 
+        } 
+    } 
+} 
+
+
+
+6. Implementing Servlet Filters 
+
+@WebFilter("/*") 
+public class LoggingFilter implements Filter { 
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain 
+chain)  
+            throws IOException, ServletException { 
+        System.out.println("IP: " + request.getRemoteAddr()); 
+        chain.doFilter(request, response); 
+    } 
+} 
+@WebFilter("/protected/*") 
+public class AuthFilter implements Filter { 
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain 
+chain)  
+            throws IOException, ServletException { 
+        HttpServletRequest req = (HttpServletRequest) request; 
+        HttpSession session = req.getSession(false); 
+
+        if (session == null || session.getAttribute("user") == null) { 
+            ((HttpServletResponse) response).sendRedirect("login.html"); 
+        } else { 
+            chain.doFilter(request, response); 
+        } 
+    } 
+}

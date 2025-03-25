@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3 - CSS Styling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #2f2b40;
+            --secondary-bg: #253462;
+            --text-color: #ffffff;
+            --accent-color: #ff9800;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background: var(--secondary-bg);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            background: url('hero.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .box {
+            background: var(--secondary-bg);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .parallax {
+            background: url('parallax.jpg') center/cover fixed;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        footer {
+            background: var(--secondary-bg);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dark-mode {
+            --primary-bg: #ffffff;
+            --secondary-bg: #e0e0e0;
+            --text-color: #000000;
+            --accent-color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="overlay">
+            <h1>Welcome to MY WEBSITE</h1>
+            <p>MADE BY ISHU ANAND MALVIYA DE 22123 22c6038</p>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="box">
+            <h2> Styling</h2>
+            <p>Applying different font families, sizes, and weights to improve readability.</p>
+        </div>
+        <div class="box">
+            <h2>Box Model & Borders</h2>
+            <p>Using padding, margins, and box shadows to structure content neatly.</p>
+        </div>
+    </section>
+
+    <section class="parallax">
+        <h2>Parallax Section</h2>
+        <p>Experience the smooth scrolling parallax effect.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Your Name | Follow us:
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Page CSS3</title>
+    <style>
+
+        :root {
+            --background: #f4f4f4;
+            --text-color: #333;
+            --primary-color: #0073e6;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode {
+            --background: #222;
+            --text-color: #f4f4f4;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--primary-color);
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        #dark-mode-toggle {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .hero {
+            height: 400px;
+            background: url('https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png') no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+        }
+        .content,
+        .services {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .service-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222;
+            color: white;
+        }
+
+        .social-icons i {
+            font-size: 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .social-icons i:hover {
+            transform: scale(1.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-overlay h2,
+        .hero-overlay p {
+            animation: fadeIn 2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <nav>
+            <h1>CSS3 DEMO</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button id="dark-mode-toggle">Dark Mode</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-overlay">
+            <h2>Welcome to the Website</h2>
+            <p>Explore amazing content with a modern design with CSS3.</p>
+        </div>
+    </section>
+
+    <section id="about" class="content">
+        <h2>About Us</h2>
+        <p>We provide high-quality services with a focus on design and usability.</p>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <h3>Web Design</h3>
+                <p>We create stunning and responsive websites.</p>
+            </div>
+            <div class="card">
+                <h3>SEO Optimization</h3>
+                <p>Boost your website's search engine ranking.</p>
+            </div>
+            <div class="card">
+                <h3>Marketing</h3>
+                <p>Effective strategies to grow your business online.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Follow us on social media</p>
+        <div class="social-icons">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+    </footer>
+
+    <script>
+
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+
+</body>
+
+</html>
